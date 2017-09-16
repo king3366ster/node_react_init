@@ -1,14 +1,17 @@
 import React from 'react'
-import {render} from 'react-dom'
+// import {render} from 'react-dom'
 
-class ProductBox extends React.Component {
+class TestCom extends React.Component {
+  setState () {
+
+  }
   render () {
     return (
-      <div className="productBox">
-        Hello World!
+      <div className="TestCom">
+        Hello World! {this.props.name}
       </div>
     )
   }
 }
 
-export default ProductBox
+export default TestCom
