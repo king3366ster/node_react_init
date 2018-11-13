@@ -1,8 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { addTodo } from '../actions'
+import { addTodo } from '../stores/actions'
 
-let AddTodo = ({ dispatch }) => {
+const AddTodo = ({ dispatch }) => {
   let input
 
   return (
@@ -24,11 +23,10 @@ let AddTodo = ({ dispatch }) => {
         />
         <button type="submit">
           Add Todo
-        </button>
+          </button>
       </form>
     </div>
   )
 }
-AddTodo = connect()(AddTodo)
 
 export default AddTodo
