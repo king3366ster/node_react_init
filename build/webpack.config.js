@@ -68,8 +68,11 @@ const config = {
       {
         test: /\.css$/,
         use: getStyleLoaders(
-          { importLoaders: 2, },
-          'sass-loader'
+          {
+            modules: true,
+            importLoaders: 1,
+            localIdentName: '[name]-[local]'
+          },
         ),
       },
       {
