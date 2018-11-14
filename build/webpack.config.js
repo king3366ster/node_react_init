@@ -1,24 +1,27 @@
+const fs = require('fs')
 const path = require('path')
 const resolve = require('resolve');
-const projectRoot = path.resolve(__dirname, '../')
-const getFilePath = dir => path.join(projectRoot, dir)
+
+const appDirectory = fs.realpathSync(process.cwd());
+
+const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // common function to get style loaders
 const getStyleLoaders = (cssOptions, preProcessor) => {
   const loaders = [
-    require.resolve('style-loader'),
     {
-      loader: require.resolve('css-loader'),
+      loader: MiniCssExtractPlugin.loader,
+      options: Object.assign({}),
+    },
+    {
+      loader: 'css-loader',
       options: cssOptions,
     },
     {
-      // Options for PostCSS as we reference these options twice
-      // Adds vendor prefixing based on your specified browser support in
-      // package.json
-      loader: require.resolve('postcss-loader'),
+      loader: 'postcss-loader',
       options: {
-        // Necessary for external CSS imports to work
-        // https://github.com/facebook/create-react-app/issues/2677
         ident: 'postcss',
         plugins: () => [
           require('postcss-flexbugs-fixes'),
@@ -33,47 +36,44 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
     },
   ];
   if (preProcessor) {
-    loaders.push(require.resolve(preProcessor));
+    loaders.push(preProcessor);
   }
   return loaders;
 };
 
 const config = {
-  devtool: 'source-map',
-  context: projectRoot,
+  context: appDirectory,
   entry: {
     main: './src/index.js'
   },
   output: {
     filename: '[name].js',
-    path: getFilePath('dist/js'),
+    path: resolveApp('dist'),
     // Code Splitting 用于页面按需懒加载
-    publicPath: 'dist/js/',
+    publicPath: 'dist/',
     pathinfo: true
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
+        include: [resolveApp('src')],
         loader: 'babel-loader',
-        include: [getFilePath('src')],
         options: {
-          customize: require.resolve(
-            'babel-preset-react-app/webpack-overrides'
-          ),
+          customize: require.resolve('babel-preset-react-app/webpack-overrides'),
           cacheDirectory: true,
-          // Don't waste time on Gzipping the cache
           cacheCompression: false,
         },
       },
       {
         test: /\.css$/,
-        use: getStyleLoaders({
-          importLoaders: 1,
-        }),
+        use: getStyleLoaders(
+          { importLoaders: 2, },
+          'sass-loader'
+        ),
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/],
         loader: 'url-loader',
         query: {
           // limit for base64 inlining in bytes
@@ -81,20 +81,18 @@ const config = {
           name: '[name].[ext]?[hash]'
         }
       },
-      {
-        // Exclude `js` files to keep "css" loader working as it injects
-        // its runtime that would otherwise be processed through "file" loader.
-        // Also exclude `html` and `json` extensions so they get processed
-        // by webpacks internal loaders.
-        exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
-        loader: require.resolve('file-loader'),
-        options: {
-          name: 'public/[name].[hash:8].[ext]',
-        },
-      },
     ]
   },
-  mode: process.NODE_ENV || 'development'
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: 'css/[name].css?[contenthash:8]',
+      chunkFilename: 'css/[name].chunk.css?[contenthash:8]',
+    }),
+  ],
+  mode: process.NODE_ENV || 'development',
+  devtool: 'source-map',
 }
 
 module.exports = config
