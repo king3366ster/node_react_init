@@ -25,12 +25,8 @@ app.engine('html', ejs.__express);
 app.set('view engine', 'html')
 
 // 单页应用页面
-app.get('/index.html', function (req, res, next) {
-  res.render(path.join(projPath, 'index'))
-})
-
 app.get('/', function (req, res, next) {
-  res.redirect('/index.html')
+  res.render(path.join(projPath, 'index'))
 })
 
 // 修改侦听服务器端口

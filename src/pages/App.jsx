@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import {AddTodo, VisibleTodoList} from '../stores'
+import coreCss from '../styles/core.css'
 
 const App = () => (
-  <div>
+  <div className={coreCss.colorRed}>
     React Project Tester
     <AddTodo />
     <VisibleTodoList />
