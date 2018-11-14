@@ -22,9 +22,11 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
     {
       loader: 'postcss-loader',
       options: {
-        ident: 'postcss',
+        parser: require('postcss-scss'),
+        map: 'inline',
         plugins: () => [
-          require('postcss-flexbugs-fixes'),
+          require('precss'),
+          // require('postcss-flexbugs-fixes'),
           require('postcss-preset-env')({
             autoprefixer: {
               flexbox: 'no-2009',
