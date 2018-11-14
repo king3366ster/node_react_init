@@ -50,7 +50,7 @@ const config = {
   },
   output: {
     filename: '[name].js',
-    path: resolveApp('dist'),
+    path: resolveApp('dist/js'),
     // Code Splitting 用于页面按需懒加载
     publicPath: 'dist/',
     pathinfo: true
@@ -92,8 +92,8 @@ const config = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: 'css/[name].css?[contenthash:8]',
-      chunkFilename: 'css/[name].chunk.css?[contenthash:8]',
+      filename: '../css/[name].css?[contenthash:8]',
+      chunkFilename: '../css/[name].chunk.css?[contenthash:8]',
     }),
   ],
   mode: process.NODE_ENV || 'development',
