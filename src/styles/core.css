@@ -8,13 +8,13 @@ html, body {
   height: 100%;
 }
 
-.gBody {
+.g-body {
   position: relative;
   width: 100%;
   height: 100%;
   background: #0f0;
 }
 
-.colorRed {
+.red {
   color: #f00;
 }
