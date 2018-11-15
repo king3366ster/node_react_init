@@ -1,7 +1,6 @@
 import React from 'react'
-// import {render} from 'react-dom'
 
-class TestCom extends React.Component {
+class Counter extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
@@ -11,10 +10,10 @@ class TestCom extends React.Component {
   render () {
     return (
       <div className="TestCom">
-        Hello World! {this.props.name} {this.state.params}
+        Hello World! {this.state.params}
       </div>
     )
   }
 }
 
-export default TestCom
+export default Counter

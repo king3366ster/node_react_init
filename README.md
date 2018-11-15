@@ -7,3 +7,4 @@
 - 线上环境运行 npm run build & npm run server
 - node环境侦听端口3001
 
+redux-devtools插件

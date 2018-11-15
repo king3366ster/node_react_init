@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux'
 import reducers from './stores/reducers'
+import states from './stores/states'
 import Root from './Root.jsx';
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(reducers)
+const store = createStore(reducers, states)
 
 ReactDOM.render(
   <Root store={store} />,
