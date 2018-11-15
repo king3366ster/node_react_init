@@ -1,3 +1,3 @@
 module.exports = {
-    testCount: 2
+  testCount: 2
 }

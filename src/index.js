@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import reducers from './stores/reducers'
 import states from './stores/states'
-import Root from './Root.jsx';
-import * as serviceWorker from './serviceWorker';
+import Root from './Root.jsx'
+import * as serviceWorker from './serviceWorker'
+// 安装redux-devtools-extension的可视化工具。
+// 谷歌应用商店下载redux-devtools
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-const store = createStore(reducers, states)
+const store = createStore(
+  reducers,
+  states,
+  composeWithDevTools(),
+)
 
 ReactDOM.render(
   <Root store={store} />,
