@@ -20,3 +20,10 @@ export const toggleTodo = id => {
     id
   }
 }
+
+export const testAddCount = num => {
+  return {
+    type: 'ADD',
+    num
+  }
+}

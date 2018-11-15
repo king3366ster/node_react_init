@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Counter from '../components/Counter'
+import {Counter} from '../stores'
 
 const Test = () => (
   <div>

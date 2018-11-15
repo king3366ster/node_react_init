@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { HashRouter as Router, Route } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import App from './pages/App.jsx'
 import Test from './pages/Test.jsx'

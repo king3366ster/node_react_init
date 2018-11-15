@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-
+import { testAddCount } from '../actions'
 import Counter from '../../components/Counter'
 
 const mapStateToProps = (state, ownProps) => {
@@ -10,15 +10,15 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    // onClick: () => {
-    //   dispatch(setVisibilityFilter(ownProps.filter))
-    // }
+    onClick: () => {
+      dispatch(testAddCount(1))
+    }
   }
 }
 
-const AddModule = connect(
+const Module = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Counter)
 
-export default AddModule
+export default Module
